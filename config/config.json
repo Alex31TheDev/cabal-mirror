@@ -1,0 +1,13 @@
+{
+    "logFile": "./logs/debug.log",
+    "eventsPath": "./events",
+    "msgLimit": 100,
+    "cabalIdentity": {
+        "username": "Cabal v19.8.4",
+        "avatarURL": "https://cdn.discordapp.com/attachments/781499018253434924/1081340038513704980/technic-launcher-logo-png-transparent.png"
+    },
+    "botChannel": {
+        "guildId": "701354865217110096",
+        "channelId": "701354865657643070"
+    }
+}
