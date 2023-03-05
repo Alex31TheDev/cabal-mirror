@@ -1,7 +1,5 @@
 import Util from "../util/Util.js";
 
-const nickTag = " - Deleted";
-
 export default {
     name: "messageDelete",
     listener: async (client, msg) => {
@@ -13,25 +11,22 @@ export default {
             return;
         }
 
-        let username = Util.getAuthorDisplayName(msg);
-        username = username.slice(0, 32 - nickTag.length) + nickTag;
-
-        const avatar = msg.author.displayAvatarURL(),
-              prevSentMsg = client.tracker.getMsg(msg.id),
-              content = {};
-
+        const prevSentMsg = client.tracker.getMsg(msg.id);
 
         if(prevSentMsg) {
-            const msgLink = Util.getMessageLink(client.config.hookGuildId, prevSentMsg.channel_id, prevSentMsg.id);
+            const msgLink = Util.getMessageLink(client.config.hookGuildId, prevSentMsg.channel_id, prevSentMsg.id),
+                  username = Util.getAuthorDisplayName(msg);
 
-            content.embeds = [
-                {
-                    description: `Deleted: [[Jump to message]](${msgLink})`
-                }
-            ];
+            const content = {
+                embeds: [
+                    {
+                        description: `${username}'s message was deleted: [[Jump to message]](${msgLink})`
+                    }
+                ]
+            };
+
+            await client.sendHookMsg(client.config.cabalIdentity.username, client.config.cabalIdentity.avatarURL, content);
         }
-        
-        await client.sendHookMsg(username, avatar, content);
 
         client.logger.info(`User ${msg.author.id} ("${msg.author.tag}")'s message in channel ${msg.channel.id} ("${msg.channel.name}") was deleted.`);
     }
