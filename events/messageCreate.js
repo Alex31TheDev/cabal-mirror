@@ -25,7 +25,7 @@ export default {
             username = username.slice(0, 32 - nickTag.length) + nickTag;
 
             if(prevSentMsg) {
-                const msgLink = Util.getMessageLink(client.config.hookGuildID, prevSentMsg.channel_id, prevSentMsg.id),
+                const msgLink = Util.getMessageLink(client.config.hookGuildId, prevSentMsg.channel_id, prevSentMsg.id),
                       replyName = Util.getAuthorDisplayName(await msg.fetchReference());
 
                 content.embeds = [
